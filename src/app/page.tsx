@@ -1,11 +1,9 @@
 'use client';
 
-import Image from "next/image";
 import ExchangeWidget from "@/components/exchange_widget";
 import InfoSection from "@/components/Info_section";
 import PriceChart from "@/components/price_chart";
 import TokenHeader from "@/components/token_header";
-import { on } from "events";
 import StatsSection from "@/components/stats_section";
 import TransactionsTable, { Transaction } from "@/components/transactions_table";
 

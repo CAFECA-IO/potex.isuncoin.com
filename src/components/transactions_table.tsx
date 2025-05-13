@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 export interface Transaction {
   time: string;
@@ -14,9 +14,15 @@ export interface Transaction {
   wallet: string;
 }
 
+export interface Pool {
+  id: string;
+  name: string;
+  liquidity: number;
+}
+
 interface TransactionsTableProps {
   transactions: Transaction[];
-  pools?: any[]; // define pool type as needed
+  pools?: Pool[];
 }
 
 const TransactionsTable: React.FC<TransactionsTableProps> = ({ transactions }) => {
@@ -59,7 +65,7 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ transactions }) =
                   <td className="px-2 py-3 text-sm">{tx.time}</td>
                   <td className={`px-2 py-3 text-sm font-medium ${tx.type === 'Buy' ? 'text-green-500' : 'text-red-500'}`}>{tx.type}</td>
                   <td className="px-2 py-3 text-sm items-center flex">
-                    <img src={tx.tokenLogo} alt={tx.tokenSymbol} className="w-4 h-4 rounded-full mr-1" />
+                    <Image src={tx.priceUnitLogo} alt={tx.priceUnit} className="w-4 h-4 rounded-full mr-1" />
                     <span>{tx.amount}</span>
                   </td>
                   <td className="px-2 py-3 text-sm items-center">

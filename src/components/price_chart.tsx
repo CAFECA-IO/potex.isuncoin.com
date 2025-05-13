@@ -7,7 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { BarChart2, LineChart, ChevronDown } from 'lucide-react';
+import { BarChart2, LineChart } from 'lucide-react';
 
 interface DataPoint {
   time: string;
@@ -81,7 +81,7 @@ const PriceChart: React.FC = () => {
     const last = newData[newData.length - 1]?.price ?? currentPrice;
     setCurrentPrice(Number(last.toFixed(6)));
     setPercentChange(Number((((last - first) / first) * 100).toFixed(2)));
-  }, [period]);
+  }, [period, currentPrice]);
 
   return (
     <div className="bg-black text-white p-4 rounded-lg">

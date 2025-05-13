@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState, ChangeEvent } from 'react';
 
 type Token = {
@@ -55,7 +56,7 @@ const ExchangeWidget: React.FC = () => {
         </div>
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
           <div className="flex items-center gap-2 bg-[#2a2a2a] rounded-full px-4 py-3">
-            <img src={sellToken.logo} alt={sellToken.symbol} className="w-6 h-6 rounded-full" />
+            <Image src={sellToken.logo} alt={sellToken.symbol} width={24} height={24} className="w-6 h-6 rounded-full" />
             <span className="text-white font-medium">{sellToken.symbol}</span>
           </div>
         </div>
@@ -76,7 +77,7 @@ const ExchangeWidget: React.FC = () => {
         </div>
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
           <div className="flex items-center gap-2 bg-[#2a2a2a] rounded-full px-4 py-3">
-            <img src={buyToken.logo} alt={buyToken.symbol} className="w-6 h-6 rounded-full" />
+            <Image src={buyToken.logo} alt={buyToken.symbol} width={24} height={24} className="w-6 h-6 rounded-full" />
             <span className="text-white font-medium">{buyToken.symbol}</span>
           </div>
         </div>

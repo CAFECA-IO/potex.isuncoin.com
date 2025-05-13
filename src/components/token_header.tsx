@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface TokenHeaderProps {
   name: string;
@@ -27,7 +28,7 @@ const TokenHeader: React.FC<TokenHeaderProps> = ({ name, symbol, logoSrc }) => {
       <div className="flex items-center justify-between">
         {/* Token Title */}
         <div className="flex items-center gap-3">
-          <img src={logoSrc} alt={name} className="w-10 h-10 rounded-full" />
+          <Image src={logoSrc} alt={name} width={40} height={40} className="w-10 h-10 rounded-full" />
           <div className="flex items-baseline gap-1">
             <h1 className="text-2xl font-semibold text-white">{name}</h1>
             <span className="text-gray-400 text-lg">{symbol}</span>
