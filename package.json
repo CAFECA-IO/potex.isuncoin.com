@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "swarm": "next start -p 10012",
     "lint": "next lint"
   },
   "dependencies": {
