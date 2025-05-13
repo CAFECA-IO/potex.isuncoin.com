@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "PotEX",
   description: "Potential Equity Exchange",
+  icons: {
+    icon: "/8017.svg",
+    shortcut: "/8017.svg",
+    apple: "/8017.svg",
+  },
 };
 
 export default function RootLayout({
