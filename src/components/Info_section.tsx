@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import { Globe, Github, BarChart2 } from 'lucide-react';
 
-const links = [
+interface LinkItem {
+  name: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  href: string;
+}
+
+const links: LinkItem[] = [
   { name: 'BAIFA', icon: BarChart2, href: 'https://baifa.io/en/app/currencies/1' },
   { name: 'WEBSITE', icon: Globe, href: 'https://isuncoin.com' },
   { name: 'GITHUB', icon: Github, href: 'https://github.com/CAFECA-IO/isuncoin' },
 ];
 
-export default function InfoSection({ description }) {
+interface InfoSectionProps {
+  description: string;
+}
+
+const InfoSection: React.FC<InfoSectionProps> = ({ description }) => {
   const [expanded, setExpanded] = useState(false);
   const truncateLength = 120;
   const isTruncated = description.length > truncateLength;
   const displayedText = !expanded && isTruncated
-    ? description.slice(0, truncateLength) + '...'
+    ? `${description.slice(0, truncateLength)}...`
     : description;
 
   return (
@@ -45,4 +55,6 @@ export default function InfoSection({ description }) {
       </p>
     </div>
   );
-}
+};
+
+export default InfoSection;

@@ -4,6 +4,170 @@ import Image from "next/image";
 import ExchangeWidget from "@/components/exchange_widget";
 import InfoSection from "@/components/Info_section";
 import PriceChart from "@/components/price_chart";
+import TokenHeader from "@/components/token_header";
+import { on } from "events";
+import StatsSection from "@/components/stats_section";
+import TransactionsTable, { Transaction } from "@/components/transactions_table";
+
+const token = {
+  name: "iSunCoin",
+  symbol: "ISC",
+  logoSrc: "/8017.svg",
+};
+
+const stats = [
+  { label: "TVL", value: "$1.1B" },
+  { label: "Market cap", value: "$297.7B" },
+  { label: "FDV", value: "$297.7B" },
+  { label: "1 day volume", value: "$960.0M" },
+]
+
+const transactions: Transaction[] = [
+  {
+    time: '1m',
+    type: 'Buy',
+    amount: 0.050,
+    price: '1.0K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$50.00',
+    wallet: '0x1a2b…3c4d',
+  },
+  {
+    time: '1m',
+    type: 'Buy',
+    amount: 0.114,
+    price: '10.2M',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$289.07',
+    wallet: '0x4170…7075',
+  },
+  {
+    time: '1m',
+    type: 'Sell',
+    amount: 0.098,
+    price: '240.50',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$248.17',
+    wallet: '0x2eDc…0B07',
+  },
+  {
+    time: '1m',
+    type: 'Buy',
+    amount: 1.33,
+    price: '3.4K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$3,358.88',
+    wallet: '0x1123…D1C9',
+  },
+  {
+    time: '1m',
+    type: 'Buy',
+    amount: 0.115,
+    price: '133.9K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$290.04',
+    wallet: '0x54e4…2F9D',
+  },
+  {
+    time: '1m',
+    type: 'Sell',
+    amount: 0.594,
+    price: '1.1K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$1,502.81',
+    wallet: '0xbeE8…0009',
+  },
+  {
+    time: '1m',
+    type: 'Sell',
+    amount: 0.691,
+    price: '71.12',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$1,748.90',
+    wallet: '0xa009…6123',
+  },
+  {
+    time: '1m',
+    type: 'Buy',
+    amount: 0.030,
+    price: '4.4K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$76.23',
+    wallet: '0x7623…8296',
+  },
+  {
+    time: '1m',
+    type: 'Sell',
+    amount: 0.600,
+    price: '62.7K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$1,518.33',
+    wallet: '0xcA74…5597',
+  },
+  {
+    time: '1m',
+    type: 'Sell',
+    amount: 0.115,
+    price: '289.73',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$289.89',
+    wallet: '0x54e4…2F9D',
+  },
+  {
+    time: '1m',
+    type: 'Sell',
+    amount: 0.138,
+    price: '5.3B',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$348.97',
+    wallet: '0x315D…9EbA',
+  },
+  {
+    time: '1m',
+    type: 'Buy',
+    amount: 0.395,
+    price: '1.0K',
+    priceUnit: 'USDT',
+    tokenSymbol: 'ISC',
+    tokenLogo: '/8017.svg',
+    priceUnitLogo: '/tether.svg',
+    usdValue: '$1,000.07',
+    wallet: '0x2973…139c',
+  },
+];
 
 const description = `
 iSunCoin
@@ -141,7 +305,7 @@ export default function Home() {
           placeholder="Search tokens"
           className="bg-zinc-800 rounded-lg px-4 py-2 w-64 text-sm"
         />
-        <button className="bg-pink-600 px-4 py-2 rounded-lg text-white font-semibold">Connect</button>
+        <button className="bg-orange-600 px-4 py-2 rounded-lg text-white font-semibold">Connect</button>
       </header>
 
       {/* Token Summary + Right Panel */}
@@ -149,49 +313,17 @@ export default function Home() {
         {/* Left Content */}
         <div className="flex-1">
           {/* Token Header */}
-          <div className="flex items-center gap-3 mb-4">
-            <Image src="/8017.svg" width={36} height={36} alt="eth" />
-            <h1 className="text-2xl font-bold">iSunCoin <span className="text-gray-400">ISC</span></h1>
-          </div>
+          <TokenHeader name={token.name} symbol={token.symbol} logoSrc={token.logoSrc}></TokenHeader>
+
           {/* Price Chart */}
           <PriceChart></PriceChart>
 
-          {/* Transactions Table */}
-          <div>
-            <h2 className="text-lg font-semibold mb-2">Transactions</h2>
-            <table className="w-full text-sm bg-zinc-900 rounded-lg overflow-hidden">
-              <thead className="bg-zinc-800">
-                <tr className="text-left">
-                  <th className="p-2">Time</th>
-                  <th className="p-2">Type</th>
-                  <th className="p-2">$ETH</th>
-                  <th className="p-2">For</th>
-                  <th className="p-2">USD</th>
-                  <th className="p-2">Wallet</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-t border-zinc-700">
-                  <td className="p-2">7m</td>
-                  <td className="p-2 text-red-400">Sell</td>
-                  <td className="p-2">0.200</td>
-                  <td className="p-2">503.21 USDT</td>
-                  <td className="p-2">$503.02</td>
-                  <td className="p-2">0xACF6...2952</td>
-                </tr>
-                <tr className="border-t border-zinc-700">
-                  <td className="p-2">7m</td>
-                  <td className="p-2 text-green-400">Buy</td>
-                  <td className="p-2">1.80</td>
-                  <td className="p-2">3.0K SYRUP</td>
-                  <td className="p-2">$797.91</td>
-                  <td className="p-2">0x7839...e454</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+          {/* Stats */}
+          <StatsSection stats={stats}></StatsSection>
 
+          {/* Transactions Table */}
+          <TransactionsTable transactions={transactions}></TransactionsTable>
+        </div>
         {/* Right Panel */}
         <aside className="w-full lg:w-100 flex-shrink-0">
           {/* Swap Box */}
